@@ -1,21 +1,15 @@
 import { isUser } from '@/Store/Login/UserLogin';
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import DummyCounter from './DummyCounter';
-import LoginScreen from './LoginScreen';
 
 const HomeScreen = () => {
   const env = 'dev';
-  const dispatch = useDispatch()
-  const value = useSelector(state => {
-    return state?.userLoginStatus?.value
-  }) 
-  console.log("Homescreen", value);
+
   return (
     <View style={styles.mainContainer}>
-      <Button title="Logout" onPress={()=>{dispatch(isUser.action(false))}}/>
-      <View style={{marginTop:30}}>
+      <View style={styles.margin}>
       <DummyCounter/>
       {/* <Text style={styles.text}>You are using</Text>
       <Text style={styles.envText}>{env}</Text>
@@ -42,5 +36,8 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontWeight:'bold',
     marginVertical:16
+  },
+  margin:{
+    marginTop:30
   }
 })

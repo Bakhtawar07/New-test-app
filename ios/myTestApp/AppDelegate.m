@@ -27,14 +27,23 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+   NSString *environment = [[NSString alloc] init];
+    #if DEV
+       environment = @"DEV";
+    #endif
+    #if LIVE
+       environment = @"LIVE";
+  [FIRApp configure];
+    #endif
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
-
+    NSDictionary *initialProperties = [[NSDictionary alloc] initWithObjectsAndKeys: environment, @"environment" , nil];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"myTestApp"
-                                            initialProperties:nil];
+                                            initialProperties:initialProperties];
 
   if (@available(iOS 13.0, *)) {
       rootView.backgroundColor = [UIColor systemBackgroundColor];

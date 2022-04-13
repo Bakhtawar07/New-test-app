@@ -1,5 +1,5 @@
 import { isUser } from '@/Store/Login/UserLogin'
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import React from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as yup from 'yup'
 
 export default function LoginScreen() {
-    const navigation = useNavigation()
-   const dispatch = useDispatch()
-   const value = useSelector(state => {
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const value = useSelector(state => {
     return state?.userLoginStatus?.value
-  }) 
-   const loginValidationSchema = yup.object().shape({
+  })
+  const loginValidationSchema = yup.object().shape({
     email: yup
       .string()
       .email('Please enter valid email')
@@ -23,13 +23,13 @@ export default function LoginScreen() {
       .required('Password is required'),
   })
 
-  function login(){
+  function login() {
     dispatch(isUser.action(true))
-
+    navigation.navigate('My Account')
   }
 
   return (
-    <View style={{ paddingHorizontal: 20, flex:1, justifyContent:'center' }}>
+    <View style={styles.container}>
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={login}
@@ -62,20 +62,16 @@ export default function LoginScreen() {
               style={styles.inputStyle}
               placeholder="Enter password"
               secureTextEntry={true}
-
             />
             {errors.password && touched.password ? (
               <Text style={styles.errorStyle}>{errors.password}</Text>
             ) : null}
 
-            <Button onPress={handleSubmit} title="Submit" color="#841584"  />
+            <Button onPress={handleSubmit} title="Submit" color="#841584" />
           </View>
         )}
       </Formik>
     </View>
-    // <View>
-    //   <Text>LoginScreen</Text>
-    // </View>
   )
 }
 
@@ -95,5 +91,9 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 4,
   },
- 
+  container: {
+    paddingHorizontal: 20,
+    flex: 1,
+    justifyContent: 'center',
+  },
 })
