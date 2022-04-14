@@ -45,7 +45,7 @@ export default function Counter() {
 
   const renderItem = useCallback(({ item, index }) => {
     return (
-      <View key={index} style={{ alignItems: 'center' }}>
+      <View key={index} style={styles.centerAlign}>
         <Text>{index}</Text>
         <Text style={styles.textStyle}>{item?.name}</Text>
         <Text style={styles.textStyle}>{item?.trips}</Text>
@@ -78,7 +78,7 @@ export default function Counter() {
     setPageNum(pageNum + 1)
   }
   return (
-    <View style={{ flex: 1, marginBottom: 50 }}>
+    <View style={styles.wrapperContainer}>
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => {
@@ -96,7 +96,7 @@ export default function Counter() {
           <Text style={styles.buttonStyle}>-</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputStyle}
           onChangeText={setAmount}
@@ -162,5 +162,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 20,
     margin: 20,
+  },
+  wrapperContainer: { flex: 1, marginBottom: 50 },
+  centerAlign: {
+    alignItems: 'center',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

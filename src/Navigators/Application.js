@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { StartupContainer } from '@/Containers'
@@ -17,45 +17,51 @@ const ApplicationNavigator = () => {
 
   const isLogin = useSelector(state => {
     return state?.userLoginStatus?.value
-  }) 
+  })
+
   const AppStack = () => (
     <>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Startup" component={StartupContainer} />
-        <Stack.Screen
-          name="Main"
-          component={MainNavigator}
-          options={{
-
-            animationEnabled: false,
-          }}
-        />
-      </Stack.Navigator>
+      <Stack.Screen name="Startup" component={StartupContainer} />
+      <Stack.Screen
+        name="Main"
+        component={MainNavigator}
+        options={{
+          animationEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          animationEnabled: false,
+        }}
+      />
     </>
   )
 
-  const AuthStack = () => (
-    <>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            animationEnabled: false,
-          }}
-        />
-      </Stack.Navigator>
-    </>
-  )
+  /* B2B App Stack */
+  // const AuthStack = () => (
+  //   <>
+  //     {/* <Stack.Navigator> */}
+  //       <Stack.Screen
+  //         name="Login"
+  //         component={LoginScreen}
+  //         options={{
+  //           animationEnabled: false,
+  //         }}
+  //       />
+  //     {/* </Stack.Navigator> */}
+  //   </>
+  // )
 
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
-        {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}
-          {isLogin ? AppStack() : AuthStack()}
-          {/* {AuthStack()}
-          {AppStack()} */}
-        {/* </Stack.Navigator> */}
+        <Stack.Navigator>
+          {/* B2B App Stack
+         {isLogin ? AppStack() : AuthStack()} */}
+          {AppStack()}
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   )

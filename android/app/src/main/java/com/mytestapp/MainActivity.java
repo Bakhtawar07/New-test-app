@@ -30,4 +30,11 @@ public class MainActivity extends ReactActivity {
       intent.putExtra("newConfig", newConfig);
       sendBroadcast(intent);
     }
+
+     @Override
+            protected Bundle getLaunchOptions() {
+              Bundle bundle = new Bundle();
+              bundle.putString("environment", BuildConfig.FLAVOR);
+              return bundle;
+            }
 }

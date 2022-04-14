@@ -11,11 +11,13 @@ const StartupContainer = () => {
 
   const { t } = useTranslation()
 
+  
+//Blocking Call
   const init = async () => {
     await new Promise(resolve =>
       setTimeout(() => {
         resolve(true)
-      }, 2000),
+      }, 5000),
     )
     await setDefaultTheme({ theme: 'default', darkMode: null })
     navigateAndSimpleReset('Main')
