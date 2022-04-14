@@ -59,10 +59,10 @@ const ApplicationForm = () => {
         {({ values, setFieldValue, handleSubmit, errors }) => (
           <>
             <View>
-              {Object.entries(values).map(([field, value]) => {
+              {Object.entries(values).map(([fieldKey, value]) => {
                 return (
                   <Element
-                    field={field}
+                    fieldKey={fieldKey}
                     value={value}
                     setFieldValue={setFieldValue}
                     errors={errors}

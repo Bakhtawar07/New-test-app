@@ -3,24 +3,24 @@ import React from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 
 const CustomSelect = props => {
-  const { field, values, errors } = props
-  console.log("SESLESCT", errors?.select?.field_value, values?.field_value);
-
+  const { fieldKey, values, errors } = props
+  function data() {
+    values?.field_options.map(item => {
+      return item?.option_label
+    })
+  }
   return (
     <>
       <View>
         <SelectDropdown
-          data={values?.field_options.map(item => {
-            return item?.option_label
-          })}
+          data={data}
           onSelect={(selectedItem, index) => {
-            props?.setFieldValue(field, {
+            props?.setFieldValue(fieldKey, {
               ...values,
               field_value: selectedItem,
             })
           }}
           defaultValue={values?.field_value}
-
         />
       </View>
       {!!errors?.select?.field_value && (

@@ -2,19 +2,22 @@ import { Text, TextInput, View, StyleSheet } from 'react-native'
 import React from 'react'
 
 const CustomInput = props => {
-  const { field, values, setFieldValue, errors } = props
+  const { fieldKey, values, setFieldValue, errors } = props
+  const handleChange = text => {
+    setFieldValue(fieldKey, { ...values, field_value: text })
+  }
   return (
     <View>
       <Text style={styles.labelStyle}>{values?.field_label}</Text>
       <TextInput
         style={styles.input}
-        onChangeText={text => {
-          setFieldValue(field, { ...values, field_value: text })
-        }}
+        onChangeText={handleChange(text)}
         placeholder={values?.field_placeholder}
         value={values?.field_value}
       />
-      {errors[field]?.field_value && (<Text style={styles.errorMessage}>{errors[field]?.field_value}</Text>)}
+      {errors[fieldKey]?.field_value && (
+        <Text style={styles.errorMessage}>{errors[fieldKey]?.field_value}</Text>
+      )}
     </View>
   )
 }
@@ -32,8 +35,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingVertical: 10,
   },
-  errorMessage:{
-      color:'red',
-      marginLeft:10
-  }
+  errorMessage: {
+    color: 'red',
+    marginLeft: 10,
+  },
 })

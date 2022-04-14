@@ -3,23 +3,24 @@ import { Text, StyleSheet, View } from 'react-native'
 import CheckBox from '@react-native-community/checkbox'
 
 const CustomCheckBox = props => {
-  const { field, values, setFieldValue, errors } = props
+  const { fieldKey, values, setFieldValue, errors } = props
+  const handleChange = val => {
+    setFieldValue(fieldKey, { ...values, field_value: val })
+  }
   return (
     <>
       <View style={styles.checkboxContainer}>
         <CheckBox
           value={values?.fieldValue}
-          onValueChange={val => {
-            setFieldValue(field, { ...values, field_value: val })
-          }}
+          onValueChange={handleChange(val)}
           style={styles.checkbox}
         />
         <View>
           <Text style={styles.label}>{values?.field_label}</Text>
         </View>
       </View>
-      {errors[field]?.field_value && (
-        <Text style={styles.errorMessage}>{errors[field]?.field_value}</Text>
+      {errors[fieldKey]?.field_value && (
+        <Text style={styles.errorMessage}>{errors[fieldKey]?.field_value}</Text>
       )}
     </>
   )

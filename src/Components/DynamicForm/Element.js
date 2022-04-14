@@ -11,7 +11,7 @@ const Element = props => {
     case 'text':
       return (
         <CustomInput
-          field={props?.field}
+          fieldKey={props?.fieldKey}
           values={props?.value}
           setFieldValue={props?.setFieldValue}
           errors={errors}
@@ -21,7 +21,7 @@ const Element = props => {
     case 'select':
       return (
         <CustomSelect
-        field={props?.field}
+        fieldKey={props?.fieldKey}
         values={props?.value}
         setFieldValue={props?.setFieldValue}
         errors={errors}
@@ -31,7 +31,7 @@ const Element = props => {
     case 'checkbox':
       return (
         <CustomCheckBox
-        field={props?.field}
+        fieldKey={props?.fieldKey}
         values={props?.value}
         setFieldValue={props?.setFieldValue}
         errors={errors}
